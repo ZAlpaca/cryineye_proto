@@ -6,9 +6,8 @@ import { Reveal } from "@/components/motion/reveal";
 import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/icons/brand-icons";
 
 const socials = [
-  { label: "GitHub", icon: GithubIcon, href: "#" },
-  { label: "LinkedIn", icon: LinkedinIcon, href: "#" },
-  { label: "Twitter", icon: TwitterIcon, href: "#" },
+  { label: "GitHub", icon: GithubIcon, href: "https://github.com/ZAlpaca" },
+  { label: "LinkedIn", icon: LinkedinIcon, href: "www.linkedin.com/in/ilya-tolstikov-6139663ab" },
   { label: "Email", icon: Mail, href: "mailto:alpaca@cryineye.space" },
 ];
 
