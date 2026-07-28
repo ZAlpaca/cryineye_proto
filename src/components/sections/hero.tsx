@@ -21,7 +21,7 @@ const terminalLines: Line[] = [
 ];
 
 export function Hero() {
-  const [renderedLines, setRenderedLines] = useState<string[]>([]);
+  const [renderedLines, setRenderedLines] = useState<number[]>([]);
   const [currentLine, setCurrentLine] = useState("");
   const [lineIdx, setLineIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
