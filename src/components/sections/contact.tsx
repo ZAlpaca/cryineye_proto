@@ -7,7 +7,7 @@ import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/icons/brand-
 
 const socials = [
   { label: "GitHub", icon: GithubIcon, href: "https://github.com/ZAlpaca" },
-  { label: "LinkedIn", icon: LinkedinIcon, href: "www.linkedin.com/in/ilya-tolstikov-6139663ab" },
+  { label: "LinkedIn", icon: LinkedinIcon, href: "https://www.linkedin.com/in/ilya-tolstikov-6139663ab" },
   { label: "Email", icon: Mail, href: "mailto:alpaca@cryineye.space" },
 ];
 
