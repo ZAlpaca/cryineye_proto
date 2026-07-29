@@ -1,17 +1,28 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, ArrowUpRight } from "lucide-react";
+import { Mail, ArrowUpRight, Check } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
-import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/icons/brand-icons";
+import { DiscordIcon, GithubIcon, LinkedinIcon, TelegramIcon } from "@/components/icons/brand-icons";
 
 const socials = [
   { label: "GitHub", icon: GithubIcon, href: "https://github.com/ZAlpaca" },
   { label: "LinkedIn", icon: LinkedinIcon, href: "https://www.linkedin.com/in/ilya-tolstikov-6139663ab" },
+  { label: "Discord", icon: DiscordIcon, copyText: "alpacarx" },
+  { label: "Telegram", icon: TelegramIcon, href: "https://t.me/alpacarx" },
   { label: "Email", icon: Mail, href: "mailto:alpaca@cryineye.space" },
 ];
 
 export function Contact() {
+  const [copiedDiscord, setCopiedDiscord] = useState(false);
+
+  const handleCopyDiscord = async () => {
+    await navigator.clipboard.writeText("alpacarx");
+    setCopiedDiscord(true);
+    setTimeout(() => setCopiedDiscord(false), 2000);
+  };
+
   return (
     <section
       id="contact"
@@ -49,14 +60,45 @@ export function Contact() {
             {/* Social links */}
             <div className="mt-10 flex items-center justify-center gap-3">
               {socials.map((s) => (
-                <a
+                <motion.div
                   key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-muted-foreground transition-all hover:border-emerald-400/40 hover:text-emerald-400"
+                  className="relative"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <s.icon className="h-5 w-5" />
-                </a>
+                  {s.label === "Discord" ? (
+                    <>
+                      <button
+                        onClick={handleCopyDiscord}
+                        aria-label="Discord"
+                        className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-muted-foreground transition-all hover:border-emerald-400/40 hover:text-emerald-400"
+                      >
+                        <s.icon className="h-5 w-5" />
+                      </button>
+
+                      {/* Toast notification - только для Discord */}
+                      {copiedDiscord && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          className="absolute bottom-full mb-2 bg-green-500 text-white px-3 py-2 rounded text-sm whitespace-nowrap flex items-center gap-2"
+                        >
+                          <Check className="h-4 w-4" />
+                          Discord скопирован!
+                        </motion.div>
+                      )}
+                    </>
+                  ) : (
+                    <a
+                      href={s.href}
+                      aria-label={s.label}
+                      className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-muted-foreground transition-all hover:border-emerald-400/40 hover:text-emerald-400"
+                    >
+                      <s.icon className="h-5 w-5" />
+                    </a>
+                  )}
+                </motion.div>
               ))}
             </div>
           </div>

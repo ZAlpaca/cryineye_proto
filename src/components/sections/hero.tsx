@@ -2,9 +2,9 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowDown, Mail } from "lucide-react";
+import { ArrowDown, Mail, Check } from "lucide-react";
 import Link from "next/link";
-import { GithubIcon, LinkedinIcon } from "@/components/icons/brand-icons";
+import { GithubIcon, LinkedinIcon, DiscordIcon, TelegramIcon } from "@/components/icons/brand-icons";
 
 type Line = {
   prompt: string;
@@ -26,7 +26,14 @@ export function Hero() {
   const [lineIdx, setLineIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
   const [done, setDone] = useState(false);
+  const [copiedDiscord, setCopiedDiscord] = useState(false);
   const terminalRef = useRef<HTMLDivElement>(null);
+
+  const handleCopyDiscord = async () => {
+    await navigator.clipboard.writeText("alpacarx");
+    setCopiedDiscord(true);
+    setTimeout(() => setCopiedDiscord(false), 2000);
+  };
 
   // Typing effect
   useEffect(() => {
@@ -66,7 +73,7 @@ export function Hero() {
       {/* Grid background */}
       <div className="absolute inset-0 grid-bg opacity-40" />
       {/* Radial glow */}
-      <div className="pointer-events-none absolute left-1/2 top-1/3 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/10 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/3 top-1/3 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/10 blur-[120px]" />
       <div className="pointer-events-none absolute bottom-10 right-10 h-[300px] w-[300px] rounded-full bg-teal-500/8 blur-[100px]" />
 
       <div className="relative z-10 w-full max-w-4xl">
@@ -178,6 +185,32 @@ export function Hero() {
               className="text-muted-foreground transition-colors hover:text-emerald-400"
             >
               <GithubIcon className="h-5 w-5" />
+            </a>
+            <button
+              onClick={handleCopyDiscord}
+              aria-label="Discord"
+              className="relative text-muted-foreground transition-colors hover:text-emerald-400"
+            >
+              <DiscordIcon className="h-5 w-5" />
+              {copiedDiscord && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  className="absolute bottom-full mb-2 -left-12 bg-green-500 text-white px-3 py-2 rounded text-xs whitespace-nowrap flex items-center gap-2"
+                >
+                  <Check className="h-3 w-3" />
+                  Скопирован!
+                </motion.div>
+              )}
+            </button>
+
+            <a
+              href="https://t.me/alpacarx"
+              aria-label="Telegram"
+              className="text-muted-foreground transition-colors hover:text-emerald-400"
+            >
+              <TelegramIcon className="h-5 w-5" />
             </a>
             <a
               href="https://www.linkedin.com/in/ilya-tolstikov-6139663ab/"
